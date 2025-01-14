@@ -19,7 +19,6 @@ class _SettingsPageState extends State<SettingsPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).cardColor,
           title: Text('$currentSettingsCategory Settings'),
           bottom: TabBar(
             dividerColor: Colors.transparent,
