@@ -5,11 +5,10 @@ import 'app.dart';
 void main() {
   runApp(MaterialApp(
     title: 'Worktime',
-    theme: ThemeData(
-      useMaterial3: true,
-      colorSchemeSeed: Color(0xFFEF682E),
-      brightness: Brightness.dark,
+    darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+      colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFABCDEF)),
     ),
+    themeMode: ThemeMode.dark,
     home: const WorktimeApp(),
   ));
 }
