@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:worktime/pages/home.dart';
+import 'package:worktime/pages/time_tracking.dart';
 
 void main() {
   runApp(const WorktimeApp());
@@ -20,34 +23,24 @@ class _WorktimeAppState extends State<WorktimeApp> {
       theme: ThemeData.dark(useMaterial3: true).copyWith(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber, brightness: Brightness.dark),
       ),
-      home: const HomePage(),
+      home: const AppScaffold(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class AppScaffold extends StatefulWidget {
+  const AppScaffold({super.key});
   
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AppScaffold> createState() => _AppScaffoldState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AppScaffoldState extends State<AppScaffold> {
   int navIndex = 0;
   bool navExtended = false;
   
-  late Widget page;
-  
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      page = switch(navIndex) {
-        0 => const HomePage(),
-        1 => Text('placeh.'),
-        _ => Text('Unimpl.'),
-      };
-    });
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Worktime'),
@@ -67,7 +60,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           children: [
             NavigationRail(
-              destinations: [
+              destinations: <NavigationRailDestination>[
                 NavigationRailDestination(
                   icon: Icon(Icons.home),
                   label: const Text('Home'),
@@ -92,7 +85,13 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             
-            page,
+            Expanded(
+              child: switch(navIndex) {
+                0 => const HomePage(),
+                1 => const TimeTrackingPage(),
+                _ => Text('Unimpl.'),
+              },
+            ),
           ],
         ),
       ),
